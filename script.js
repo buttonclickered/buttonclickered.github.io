@@ -14,15 +14,20 @@ function Add() {
   updateHeader();
 }
 
+
 function startPerSecond() {
   if (intervalId !== null) return;
   intervalId = setInterval(() => {
     idk += persec;
     updateHeader();
-    APS.textContent = 'Money Per Second: ' + persec
-    CPS.textContent = 'Money Per Click: ' + perclick
   }, 1000);
 }
+
+// Update APS and CPS display every 100ms for faster feedback
+setInterval(() => {
+  APS.textContent = 'Money Per Second: ' + persec;
+  CPS.textContent = 'Money Per Click: ' + perclick;
+}, 100);
 
 function addsec(amount,cost) {
   if (idk >= cost) {
