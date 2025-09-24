@@ -1,16 +1,27 @@
-let idk = 0;         // always a number
-let persec = 0;
+
+// Load saved values or use defaults
+let idk = Number(localStorage.getItem('idk')) || 0;
+let persec = Number(localStorage.getItem('persec')) || 0;
+let perclick = Number(localStorage.getItem('perclick')) || 1;
 let intervalId = null;
-let perclick = 1
 const headerDiv = document.getElementById("header");
 const APS = document.getElementById("APS");
-const CPS = document.getElementById("CPS")
-function updateHeader() {
-  headerDiv.textContent = idk;
+const CPS = document.getElementById("CPS");
+
+function saveGame() {
+  localStorage.setItem('idk', idk);
+  localStorage.setItem('persec', persec);
+  localStorage.setItem('perclick', perclick);
 }
 
+function updateHeader() {
+  headerDiv.textContent = idk;
+  saveGame();
+}
+
+
 function Add() {
-  idk = idk + perclick
+  idk = idk + perclick;
   updateHeader();
 }
 
@@ -31,21 +42,26 @@ setInterval(() => {
 
 function addsec(amount,cost) {
   if (idk >= cost) {
-    persec = persec + amount
-    idk -= cost;        // subtract 10 from the number
+    persec = persec + amount;
+    idk -= cost;
     updateHeader();
+    saveGame();
   } else {
     alert('not enough clicks');
   }
 }
 function addclick(amount,cost) {
   if (idk >= cost) {
-    perclick = perclick + amount
-    idk -= cost;        // subtract 10 from the number
+    perclick = perclick + amount;
+    idk -= cost;
     updateHeader();
+    saveGame();
   } else {
     alert('not enough clicks');
   }
 }
 
+
+// On first load, update header to show loaded values
+updateHeader();
 startPerSecond();
