@@ -1,3 +1,7 @@
+// Disable right-click context menu for the whole page
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
 
 // Load saved values or use defaults
 let idk = Number(localStorage.getItem('idk')) || 0;
@@ -40,6 +44,15 @@ setInterval(() => {
   CPS.textContent = 'Money Per Click: ' + perclick;
 }, 100);
 
+function showNotification(message) {
+  const notification = document.getElementById('notification');
+  notification.textContent = message;
+  notification.style.display = 'block';
+  setTimeout(() => {
+    notification.style.display = 'none';
+  }, 2000);
+}
+
 function addsec(amount,cost) {
   if (idk >= cost) {
     persec = persec + amount;
@@ -47,7 +60,7 @@ function addsec(amount,cost) {
     updateHeader();
     saveGame();
   } else {
-    alert('not enough clicks');
+    showNotification('Not enough money!');
   }
 }
 function addclick(amount,cost) {
@@ -57,7 +70,7 @@ function addclick(amount,cost) {
     updateHeader();
     saveGame();
   } else {
-    alert('not enough clicks');
+    showNotification('Not enough money!');
   }
 }
 

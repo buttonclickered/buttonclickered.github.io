@@ -1,3 +1,19 @@
+#notification {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  background: #ff4444;
+  color: #fff;
+  padding: 18px 36px;
+  border-radius: 10px;
+  font-size: 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  display: none;
+  opacity: 0.95;
+  pointer-events: none;
+}
 #upgrade-container {
   position: relative;
   left: 1065px;
